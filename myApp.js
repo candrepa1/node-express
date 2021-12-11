@@ -1,4 +1,5 @@
 require("dotenv").config();
+const bodyParser = require("body-parser");
 var express = require("express");
 var app = express();
 
@@ -26,6 +27,8 @@ app.get(
 		res.json({ time: req.time });
 	}
 );
+
+app.use("/name", bodyParser.urlencoded({ extended: false }));
 
 app.get("/name", (req, res) => {
 	const { first, last } = req.query;
