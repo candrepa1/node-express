@@ -27,6 +27,10 @@ app.get(
 	}
 );
 
+app.get("/:word/echo", (req, res) => {
+	res.json({ echo: req.params.word });
+});
+
 app.get("/json", (req, res) => {
 	let value = "Hello json";
 	res.json({
