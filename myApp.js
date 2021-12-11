@@ -4,6 +4,13 @@ var app = express();
 
 console.log("Hello World");
 
+app.use((req, res, next) => {
+	console.log(`${req.method} ${req.path} - ${req.ip}`);
+	next();
+});
+
+app.use("/public", express.static(__dirname + "/public"));
+
 app.get("/", (req, res) => {
 	console.log(__dirname);
 	res.sendFile(__dirname + "/views/index.html");
@@ -16,7 +23,5 @@ app.get("/json", (req, res) => {
 			process.env.MESSAGE_STYLE === "uppercase" ? value.toUpperCase() : value,
 	});
 });
-
-app.use("/public", express.static(__dirname + "/public"));
 
 module.exports = app;
